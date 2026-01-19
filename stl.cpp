@@ -480,6 +480,19 @@ void explainQueue() {
     cout << pq2.top() << endl; // Output: 1
     pq2.pop();
     cout << pq2.top() << endl;  // Output: 2
+
+    // Internal swap logic
+    priority_queue<int, vector<int>, greater<int>> pq3;
+    pq3.push(10);
+
+    // O(1) - Swap is constant time as it swaps internal container references
+    pq2.swap(pq3); 
+
+    cout << pq2.top() << endl; // Output: 10 (from pq3)
+
+    // Note: You cannot swap 'pq' (Max-Heap) with 'pq2' (Min-Heap) 
+    // because they are considered different data types in C++.
+
 }
 
 int main(){
