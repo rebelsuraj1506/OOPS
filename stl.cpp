@@ -1,4 +1,5 @@
 #include <deque>
+#include <functional>
 #include <iostream>
 #include <queue>
 #include <utility> // Required for pair
@@ -55,6 +56,20 @@ using namespace std;
     cout << p6.first[0].first << " " << p6.first[0].second << " " << p6.first[1].first << " " << p6.first[1].second << " " << p6.second[0].first << " " << p6.second[0].second << " " << p6.second[1].first << " " << p6.second[1].second << endl;
 }
 
+/**
+ * VECTOR EXPLAINED:
+ * A vector is a dynamic array that can resize itself automatically when an element 
+ * is inserted or deleted. It is a sequence container that stores elements in 
+ * contiguous memory locations.
+ * 
+ * Key Features:
+ * 1. Dynamic Size: Unlike arrays, vectors adjust their size at runtime.
+ * 2. Contiguous Storage: Elements are stored side-by-side, allowing O(1) random access.
+ * 3. Amortized O(1) Push Back: Inserting at the end is constant time unless capacity is full.
+ * 4. Memory Management: Automatically manages heap memory; manual deletion is not required.
+ * 
+ * Documentation: [cppreference.com - std::vector](https://en.cppreference.com)
+ */
 void explainVector(){
     vector<int> v;
     // O(1) Amortized - Constant time unless reallocation is needed
@@ -423,6 +438,50 @@ void explainQueue() {
     // Output: 23
 }
 
+/**
+ * PRIORITY QUEUE EXPLAINED:
+ * A priority_queue is a container adaptor that provides constant time O(1) lookup 
+ * of the element with the highest priority (the largest by default).
+ * It is internally implemented as a heap (typically a binary max-heap).
+ * 
+ * Key Features:
+ * 1. Default Behavior (Max-Heap): The largest element is always at the top.
+ * 2. Min-Heap Implementation: Using `greater<T>`, the smallest element stays at the top.
+ * 3. Logarithmic Efficiency: Insertion and deletion take O(log N) to maintain heap order.
+ * 4. Restricted Access: Only the `top()` element is accessible; it does not support iteration.
+ * 
+ * Documentation: [cppreference.com - std::priority_queue](https://en.cppreference.com)
+ */
+ void explainPQ() {
+    // MAX-HEAP (Default)
+    priority_queue<int> pq;
+    pq.push(5);     // {5}
+    pq.push(2);     // {5, 2}
+    pq.push(7);     // {7, 5, 2}
+    pq.emplace(1);  // {7, 5, 2, 1}
+
+    // O(1) - Access largest element
+    cout << pq.top() << endl; // Output: 7
+
+    // O(log N) - Removes top (7) and re-heaps
+    pq.pop(); 
+    cout << pq.top() << endl; // Output: 5
+
+    // MIN-HEAP
+    // Syntax: priority_queue<Type, Container, Comparator>
+    priority_queue<int, vector<int>, greater<int>> pq2;
+    
+    // Note: Calling pop() on an empty PQ is Undefined Behavior!
+    // Always check !pq2.empty() before access.
+    pq2.push(2);    // {2}
+    pq2.push(1);    // {1, 2}
+    pq2.emplace(53); // {1, 2, 53}
+
+    cout << pq2.top() << endl; // Output: 1
+    pq2.pop();
+    cout << pq2.top() << endl;  // Output: 2
+}
+
 int main(){
     cout << "Pair:" << endl;
     explainPair();
@@ -436,5 +495,7 @@ int main(){
     explainStack();
     cout << "Queue:" << endl;
     explainQueue();
+    cout << "Priority Queue:" << endl;
+    explainPQ();
     return 0;
 }
