@@ -35,6 +35,18 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
 - **What it shows:** 
   - `Abstraction.cpp`: abstract `PaymentMethod::processPayment`, concrete `CreditCard`/`PayPal`, `dynamic_cast` to reach derived-only behavior, virtual destructor.
   - `Abstraction_child_parent.cpp`: abstract base `Parent`, derived `Child`, virtual destructor cleanup via base pointer.
+- **Diagram (interface to concrete types):**
+  ```
+     PaymentMethod (abstract)
+         /          \
+  CreditCard      PayPal
+         ^           ^
+         |           | dynamic_cast to PayPal-only API
+
+     Parent (abstract)
+         |
+       Child
+  ```
 - **Sample output — `Abstraction.cpp`:**
   ```
   Processing $150 via Credit Card Secure Gateway...
@@ -78,6 +90,15 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
 ## Compile-time polymorphism (`Compile_time_Polymorphism.cpp`)
 - **Definition:** Binding decided by the compiler via overload resolution (functions/operators/constructors).
 - **What it shows:** constructor overloading, `Print::show` overloads, `Number::operator+`.
+- **Diagram (overload set chosen at compile time):**
+  ```
+        show(int)      show(string)
+             \            /
+              \          /
+              call site (argument type picks overload)
+
+  Number + Number  --> operator+(const Number&)
+  ```
 - **Sample output:**
   ```
   Non-parameterized Constructor
@@ -94,6 +115,15 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
 ## Run-time polymorphism (`Run_time_Polymorphism.cpp`)
 - **Definition:** Virtual functions enable dynamic dispatch based on the actual object at runtime.
 - **What it shows:** `Parent::hello` virtual, overridden in `Child`; static vs dynamic binding; explicit base calls.
+- **Diagram (vtable dispatch):**
+  ```
+  Parent* ptr --> [Child object]
+                     |
+                   vptr --> vtable --> hello() resolves to Child
+
+  ptr->hello();          // late-bound
+  ptr->Parent::hello();  // forced base
+  ```
 - **Sample output:**
   ```
   Child Class.
@@ -202,7 +232,7 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
   Employee ID: 103
   ```
 
--## Hybrid / virtual parameterized inheritance (`Virtual_parameterized_Inheritance.cpp`, `Hybrid.cpp`)
+## Hybrid / virtual parameterized inheritance (`Virtual_parameterized_Inheritance.cpp`, `Hybrid.cpp`)
 - **Definition:** Mix of hierarchical + multiple inheritance while virtually sharing a common base to avoid duplicates.
 - **Diagram:**
   ```
@@ -237,6 +267,14 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
 
 ## Static storage duration (`static.cpp`)
 - **Definition:** `static` locals persist across function calls; instance members are per-object.
+- **Diagram (lifetime vs instance):**
+  ```
+  fun():
+    static x (data segment, one copy, retains value)
+
+  A obj1 --> x (unique per object)
+  A obj2 --> x (unique per object)
+  ```
 - **Sample output:**
   ```
   x in fun() : 0
@@ -250,6 +288,14 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
 
 ## Copy semantics (`shallow_vs_deep_copy.cpp`)
 - **Definition:** Shallow copy shares pointers (risking double-free/aliasing); deep copy duplicates owned resources.
+- **Diagram (alias vs owned memory):**
+  ```
+  ShallowStudent s1 cgpaPtr --> [8.5] (heap A)
+                 s2 cgpaPtr --> [8.5] (same A)
+
+  DeepStudent d1 cgpaPtr --> [9.0] (heap B)
+             d2 cgpaPtr --> [9.0] (heap C, separate)
+  ```
 - **Sample output (showing aliasing vs independence):**
   ```
   --- SHALLOW COPY TEST ---
