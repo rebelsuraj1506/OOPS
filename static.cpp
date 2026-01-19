@@ -14,7 +14,7 @@ void fun(){
     // This line is executed only during the first call to fun()
     static int x = 0; 
     
-    cout << "x : " << x << endl;
+    cout << "x in fun() : " << x << endl;
     
     // Incrementing x; because it is static, the new value persists
     x++;
@@ -45,7 +45,7 @@ int main(){
     /**
      * Call 2: x is NOT re-initialized. It starts at 1, is printed, then incremented to 2.
      */
-    fun(); // Output: x : 1
+    fun(); // Output: x in fun() : 1
     
     /**
      * Call 3: x starts at 2, is printed, then incremented to 3.
@@ -62,11 +62,16 @@ int main(){
      // Manual initialization of the member variable
      obj1.x = 100;
      obj2.x = 200;
-     cout << "x = " << obj1.x << endl; // Output: 0
+     cout << "Object 1 x Original value = " << obj1.x << endl; // Output: 0
+     // Modifying the state of 'obj'
+     obj1.incX();
+     cout << "Object 1 x after increment = " << obj1.x << endl; // Output: 1
+
+     cout << "Object 2 x Original value = " << obj2.x << endl; // Output: 200
  
      // Modifying the state of 'obj'
      obj2.incX();
-     cout << "x = " << obj2.x << endl; // Output: 1
+     cout << "Object 2 x after increment = " << obj2.x << endl; // Output: 1
  
      /**
       * Note: If you created another object 'A obj2;', it would have 

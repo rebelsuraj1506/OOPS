@@ -18,6 +18,9 @@ class Teacher {
 public:
     string subject;
     double salary;
+    ~Teacher() {
+        // Destructor for Teacher
+    }
 };
 
 /**
@@ -38,6 +41,9 @@ public:
         cout << "Rollno : " << rollno << endl; // Inherited from Student
         cout << "Subject : " << subject << endl; // Inherited from Teacher
         cout << "Salary : " << salary << endl;   // Inherited from Teacher
+    }
+    ~TA() {
+        // Destructor for TA
     }
 };
 
