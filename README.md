@@ -23,8 +23,10 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
 
 ## Abstraction (`Abstraction.cpp`, `Abstraction_child_parent.cpp`)
 - **Definition:** Expose *what* an object does via abstract interfaces (pure virtual functions) while hiding *how*.
-- **What it shows:** abstract `PaymentMethod::processPayment`, concrete `CreditCard`/`PayPal`, `dynamic_cast` to reach derived-only behavior; separate example with abstract `Parent` and virtual destructor.
-- **Sample output:**
+- **What it shows:** 
+  - `Abstraction.cpp`: abstract `PaymentMethod::processPayment`, concrete `CreditCard`/`PayPal`, `dynamic_cast` to reach derived-only behavior, virtual destructor.
+  - `Abstraction_child_parent.cpp`: abstract base `Parent`, derived `Child`, virtual destructor cleanup via base pointer.
+- **Sample output — `Abstraction.cpp`:**
   ```
   Processing $150 via Credit Card Secure Gateway...
   Receipt generated for: $150
@@ -32,6 +34,9 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
   Redirecting to PayPal... Processing $45.5
   Receipt generated for: $45.5
   Your remaining balance is $104.5
+  ```
+- **Sample output — `Abstraction_child_parent.cpp`:**
+  ```
   Name: Rahul
   Hello from Child.
   Child Destructor.
@@ -166,7 +171,7 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
   Employee ID: 103
   ```
 
-## Hybrid / virtual parameterized inheritance (`Virtual_parameterized_Inheritance.cpp`, `Hybrid.cpp`)
+-## Hybrid / virtual parameterized inheritance (`Virtual_parameterized_Inheritance.cpp`, `Hybrid.cpp`)
 - **Definition:** Mix of hierarchical + multiple inheritance while virtually sharing a common base to avoid duplicates.
 - **Diagram:**
   ```
@@ -176,7 +181,16 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
          \         /
             TA
   ```
-- **Sample output:**
+- **Sample output — `Virtual_parameterized_Inheritance.cpp`:**
+  ```
+  Name : Suraj
+  Age : 0
+  Rollno : 0
+  Subject : OOPS
+  Salary : 150000
+  Suraj OOPS
+  ```
+- **Sample output — `Hybrid.cpp`:**
   ```
   Name : Suraj
   Age : 0
