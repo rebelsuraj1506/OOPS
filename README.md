@@ -5,6 +5,15 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
 ## Encapsulation & constructor patterns (`oops.cpp`)
 - **Definition:** Encapsulation hides data behind an interface; constructors set up state, and custom copy constructors control copy semantics.
 - **What it shows:** private salary with getters/setters; default, parameterized, and custom copy constructor; deep-copy of heap `cgpaPtr`; destructor cleanup.
+- **Diagram (objects and heap copy):**
+  ```
+  Teacher t1 -----> {name, subject, salary}
+               \
+                \__ Teacher t3 (copy-ctor tweaks fields)
+
+  Student s1 ----> cgpaPtr: [7.6]   (heap)
+  Student s2 ----> cgpaPtr: [8.3]   (deep-copied heap block)
+  ```
 - **Sample output (abridged):**
   ```
   Printing Teacher1 Info : Name : Suraj
@@ -46,6 +55,13 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
 ## Composition vs. aggregation (`Aggregation.cpp`)
 - **Definition:** “Has-a” composition assembles objects; lifetimes owned by the container. Aggregation is a weaker, shareable link.
 - **What it shows:** `TeamLead` contains `Employee`, `ManagerRole`, `DeveloperRole` instead of inheriting.
+- **Diagram (has-a composition):**
+  ```
+  TeamLead
+    |-- Employee (id)
+    |-- ManagerRole (managementLevel)
+    |-- DeveloperRole (primaryLanguage)
+  ```
 - **Sample output:**
   ```
   [System] TeamLead assembled via Composition (2026 Architecture).
@@ -91,6 +107,14 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
 ## Single & multilevel inheritance (`Inheritance.cpp`)
 - **Definition:** Derived classes reuse and extend base class state/behavior across levels.
 - **What it shows:** `Person -> Student -> GradStudent`, `using Person::Person`, overridden `getInfo`.
+- **Diagram (multilevel chain):**
+  ```
+  Person
+    |
+  Student
+    |
+  GradStudent
+  ```
 - **Sample output:**
   ```
   Name : Neha
@@ -110,6 +134,13 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
 ## Multiple inheritance (`Multiple_inheritance.cpp`)
 - **Definition:** A class derives from more than one base, combining their interfaces/data.
 - **What it shows:** `TA` inherits from `Student` and `Teacher`, uses members from both.
+- **Diagram (two parents):**
+  ```
+   Student        Teacher
+        \        /
+         \      /
+            TA
+  ```
 - **Sample output:**
   ```
   Name : Suraj
