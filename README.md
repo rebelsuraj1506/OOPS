@@ -492,9 +492,9 @@ Self-contained C++ programs that demonstrate core OOP topics. Each file has its 
 - **Definition:** Multiple classes inherit from one base class (A → B, A → C, A → D). One parent, many children.
 - **Diagram:**
   ```
-      Person
-     /  |  \
-Student Teacher Employee
+            Person
+          /  |  \
+      Student Teacher Employee
   ```
 - **Key Characteristics:**
   - Code reuse from common base
