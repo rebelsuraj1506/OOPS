@@ -177,5 +177,19 @@ int main(){
     cout << "Is 0 Reachable to 4: " << g2.isReachable(0, 4, visited) << endl;
     cout << "Is Graph Cyclic: " << g2.is_cyclic() << endl;
     cout << "Is Graph Bipartite: " << g2.is_bipartite() << endl;
+
+    Graph g3(5);
+    g3.addEdge(0, 1);
+    g3.addEdge(0, 2);
+    g3.addEdge(1, 3);
+    g3.addEdge(2, 4);
+    cout << "Shortest Path from 0 to 4: " << g3.shortest_path(0, 4) << endl;
+
+    Graph g4(5);
+    g4.addEdge(0, 1);
+    g4.addEdge(1, 2);
+    g4.addEdge(2, 3);
+    g4.addEdge(1, 3);
+    cout << "Is Graph Bipartite: " << g4.is_bipartite() << endl;
     return 0;
 }
