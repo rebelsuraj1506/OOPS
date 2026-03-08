@@ -1,2 +1,12 @@
 *.o
+*.exe
+*.out
+*.a
+*.so
+*.dll
+*.lib
+*.exp
+*.def
+*.manifest
+*.res
 
